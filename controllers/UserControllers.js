@@ -101,8 +101,7 @@ const updateUser = async (req, res) => {
       msg: "not authorized to update this account",
       success: false,
     });
-  }
-
+  } 
   let { name, password,profilePic,coverPic,bio,city } = req.body;
   try {
     if (password) {
@@ -113,7 +112,7 @@ const updateUser = async (req, res) => {
       profilePic,
       coverPic,
       bio,
-       city,
+       city,  
       password: hashedPassword,
     });
     res.json({ msg: "user updated successfull", success: true });
@@ -210,7 +209,7 @@ const passwordReset = async (req, res) => {
       user.password = hashedPassword;
       user.resetPasswordToken = null;
       await user.save();
-      res.json({ msg: "password updated scuuessfully", success: true });
+      res.json({ msg: "password updated successfully", success: true });
     } else {
       res.json({ msg: "token expired", success: false });
     }
