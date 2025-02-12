@@ -40,12 +40,7 @@ const createUser = async (req, res) => {
     });
   }
 
-  // let data = await new userCollection({
-  //     name,
-  //     email,
-  //     password
-  // })
-  // await data.save
+
 };
 
 //  loginUser
@@ -59,7 +54,7 @@ const loginUser = async (req, res) => {
   }
 
   let findUser = await userCollection.findOne({ email });
-  console.log(findUser); ///{_id ,email ,password}
+  console.log(findUser);
 
   if (findUser) {
     let comparePasssword = bcrypt.compareSync(password, findUser.password);
@@ -142,7 +137,7 @@ const forgetPassword = async (req, res) => {
         msg: "Please check your email for password reset",
         success: true,
       });
-      //    let updateUser = await userCollection.findByIdAndUpdate(user._id, {resetPasswordToken:resetToken})
+      
     } else {
       res.json({ msg: "invalid email", success: false });
     }
@@ -161,24 +156,23 @@ function sendEmail(email, resetToken) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
-    secure: false, // true for port 465, false for other ports
+    secure: false, 
     auth: {
       user: "sinhaswitu154@gmail.com",
       pass: "qaab pjmh xslc phig",
     },
   });
-  // async..await is not allowed in global scope, must use a wrapper
+  
   async function main() {
-    // send mail with defined transport object
+   
     const info = await transporter.sendMail({
-      from: "sinhaswitu154@gmail.com", // sender address
-      to: email, // list of receivers
-      subject: "Password reset Request", // Subject line
+      from: "sinhaswitu154@gmail.com", 
+      subject: "Password reset Request",
       text: `Please click the line below to choose a new password: \n
-           http://localhost:8092/users/resetToken/${resetToken}`, // plain text body
+           http://localhost:8092/users/resetToken/${resetToken}`,
     });
     console.log("Message sent: %s", info.messageId);
-    // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+   
   }
   main().catch(console.error);
 }
@@ -187,8 +181,7 @@ function sendEmail(email, resetToken) {
 //reset password 
 const resetPassword = async (req, res) => {
   let token = req.params.token;
-  //res.send("hello")
-
+ 
   let user = await userCollection.findOne({ resetPasswordToken: token });
   if (user) {
     res.render("resetPassword", { token });
