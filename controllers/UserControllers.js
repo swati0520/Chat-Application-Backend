@@ -107,7 +107,7 @@ const updateUser = async (req, res) => {
       profilePic,
       coverPic,
       bio,
-       city,  
+      city,  
       password: hashedPassword,
     });
     res.json({ msg: "user updated successfull", success: true });
