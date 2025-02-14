@@ -169,7 +169,7 @@ function sendEmail(email, resetToken) {
       from: "sinhaswitu154@gmail.com", 
       subject: "Password reset Request",
       text: `Please click the line below to choose a new password: \n
-           http://localhost:8092/users/resetToken/${resetToken}`,
+           https://chat-application-backend-476e.onrender.com/users/resetToken/${resetToken}`,
     });
     console.log("Message sent: %s", info.messageId);
    
