@@ -167,6 +167,7 @@ function sendEmail(email, resetToken) {
    
     const info = await transporter.sendMail({
       from: "sinhaswitu154@gmail.com", 
+      to: email,
       subject: "Password reset Request",
       text: `Please click the line below to choose a new password: \n
            https://chat-application-backend-476e.onrender.com/users/resetToken/${resetToken}`,
